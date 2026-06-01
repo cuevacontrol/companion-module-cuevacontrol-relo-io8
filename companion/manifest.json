@@ -22,6 +22,6 @@
 		"entrypoint": "../src/main.js"
 	},
 	"manufacturer": "Cueva Control",
-	"products": ["RELOIO8"],
+	"products": ["RELO-IO8"],
 	"keywords": ["relay", "io", "gpio", "cueva", "automation", "relo"]
 }
