@@ -39,7 +39,7 @@ function updatePresets(self) {
 			feedbacks: [
 				{
 					feedbackId: 'relay_state',
-					options: { relay_id: i, expected_state: 'on' },
+					options: { relay_id: i },
 					style: { bgcolor: BRAND_GREEN, color: WHITE },
 				},
 			],
@@ -122,7 +122,7 @@ function updatePresets(self) {
 			feedbacks: [
 				{
 					feedbackId: 'input_state',
-					options: { input_id: i, expected_state: 'active' },
+					options: { input_id: i },
 					style: {
 						text: `$(${id}:input_${i}_label)\nHIGH`,
 						bgcolor: TRIGGER_GREEN,
@@ -293,7 +293,7 @@ function updatePresets(self) {
 		category: 'LED',
 		name: 'LED Cueva Green',
 		style: { text: 'LED\nGREEN', size: '14', color: WHITE, bgcolor: BRAND_GREEN },
-		steps: [{ down: [{ actionId: 'set_led_color', options: { hex_color: 0x007823 } }], up: [] }],
+		steps: [{ down: [{ actionId: 'set_led_color', options: { hex_color: '#007823' } }], up: [] }],
 		feedbacks: [],
 	}
 

@@ -73,15 +73,18 @@ class ReloIO8Instance extends InstanceBase {
 	}
 
 	async configUpdated(config) {
+		const needsReconnect = config.host !== this.config.host || config.token !== this.config.token
 		this.config = config
-		this._clearTimers()
-		this.authenticated = false
-		if (this.ws) {
-			this.ws.removeAllListeners()
-			this.ws.terminate()
-			this.ws = null
+		if (needsReconnect) {
+			this._clearTimers()
+			this.authenticated = false
+			if (this.ws) {
+				this.ws.removeAllListeners()
+				this.ws.terminate()
+				this.ws = null
+			}
+			this._connect()
 		}
-		this._connect()
 	}
 
 	getConfigFields() {
@@ -89,10 +92,10 @@ class ReloIO8Instance extends InstanceBase {
 			{
 				id: 'host',
 				type: 'textinput',
-				label: 'Host (IP address)',
+				label: 'Host (IP address or hostname)',
 				width: 12,
 				default: '192.168.1.100',
-				regex: '/^[\\w.-]+$/',
+				regex: '/^[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?$/',
 			},
 			{
 				id: 'token',

@@ -36,23 +36,21 @@ function updateActions(self) {
 				{
 					id: 'duration_ms',
 					type: 'number',
-					label: 'Pulse duration (ms) — only used when action is Pulse',
+					label: 'Pulse duration (ms)',
 					default: 500,
 					min: 50,
 					max: 60000,
+					isVisibleFn: (options) => options.state === 'pulse',
 				},
 			],
 			callback: async (action) => {
 				const relay_id = Number(action.options.relay_id)
 				const state = String(action.options.state)
-				const duration_ms = Number(action.options.duration_ms) || 500
+				const duration_ms = Math.round(Number(action.options.duration_ms) || 500)
 
 				if (state === 'pulse') {
-					// Two-command pulse for real-time state change visibility
 					self.log('info', `PULSE relay=${relay_id} duration=${duration_ms}ms`)
-					self._send({ type: 'SET_RELAY', relay_id, state: 'on' })
-					await new Promise((resolve) => setTimeout(resolve, duration_ms))
-					self._send({ type: 'SET_RELAY', relay_id, state: 'off' })
+					self._send({ type: 'SET_RELAY', relay_id, state: 'pulse', duration_ms })
 				} else {
 					self.log('info', `SET_RELAY relay=${relay_id} state=${state}`)
 					self._send({ type: 'SET_RELAY', relay_id, state })
@@ -79,7 +77,7 @@ function updateActions(self) {
 			],
 			callback: async (action) => {
 				const { node_id } = action.options
-				if (!node_id) {
+				if (node_id === undefined || node_id === null || node_id === '') {
 					self.log('warn', 'execute_node: no node_id provided')
 					return
 				}
@@ -106,7 +104,7 @@ function updateActions(self) {
 			],
 			callback: async (action) => {
 				const { preset_id } = action.options
-				if (!preset_id) {
+				if (preset_id === undefined || preset_id === null || preset_id === '') {
 					self.log('warn', 'apply_preset: no preset_id provided')
 					return
 				}
@@ -136,16 +134,12 @@ function updateActions(self) {
 					id: 'hex_color',
 					type: 'colorpicker',
 					label: 'Color',
-					default: 0x007823,
+					default: '#007823',
+					returnType: 'string',
 				},
 			],
 			callback: async (action) => {
-				const rgb = action.options.hex_color
-				const red   = (rgb >> 16) & 0xff
-				const green = (rgb >> 8)  & 0xff
-				const blue  =  rgb        & 0xff
-				const hex = '#' + [red, green, blue].map(v => v.toString(16).padStart(2, '0')).join('')
-				self._send({ type: 'SET_LED_COLOR', hex_color: hex })
+				self._send({ type: 'SET_LED_COLOR', hex_color: action.options.hex_color })
 			},
 		},
 
@@ -162,7 +156,7 @@ function updateActions(self) {
 				},
 			],
 			callback: async (action) => {
-				self._send({ type: 'SET_LED_BRIGHTNESS', brightness: Number(action.options.brightness) })
+				self._send({ type: 'SET_LED_BRIGHTNESS', brightness: Math.round(Number(action.options.brightness)) })
 			},
 		},
 
@@ -196,7 +190,7 @@ function updateActions(self) {
 				self._send({
 					type: 'SET_LED_EFFECT',
 					effect: Number(action.options.effect),
-					speed_ms: Number(action.options.speed_ms),
+					speed_ms: Math.round(Number(action.options.speed_ms)),
 				})
 			},
 		},
@@ -218,7 +212,12 @@ function updateActions(self) {
 			],
 			callback: async (action) => {
 				const { enabled } = action.options
-				const state = enabled === 'toggle' ? !self.ledEnabled : enabled === 'on'
+				let state
+				if (enabled === 'toggle') {
+					state = !self.ledEnabled
+				} else {
+					state = enabled === 'on'
+				}
 				self._send({ type: 'SET_LED_ENABLED', enabled: state })
 			},
 		},

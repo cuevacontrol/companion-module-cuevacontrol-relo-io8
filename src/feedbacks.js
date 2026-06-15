@@ -45,7 +45,7 @@ function updateFeedbacks(self) {
 		// -----------------------------------------------------------------------
 		relay_state: {
 			name: 'Relay State',
-			description: 'Change button style when a relay is on or off',
+			description: 'Active when the selected relay is on. Use the built-in feedback invert to trigger when off.',
 			type: 'boolean',
 			defaultStyle: {
 				bgcolor: combineRgb(0, 120, 35),    // #007823 brand green
@@ -59,22 +59,10 @@ function updateFeedbacks(self) {
 					default: 1,
 					choices: relayChoices(),
 				},
-				{
-					id: 'expected_state',
-					type: 'dropdown',
-					label: 'State triggers feedback when relay is',
-					default: 'on',
-					choices: [
-						{ id: 'on', label: 'On' },
-						{ id: 'off', label: 'Off' },
-					],
-				},
 			],
 			callback: (feedback) => {
 				const idx = Number(feedback.options.relay_id) - 1
-				const isOn = self.relayState[idx] ?? false
-				const wantOn = feedback.options.expected_state === 'on'
-				return wantOn ? isOn : !isOn
+				return self.relayState[idx] ?? false
 			},
 		},
 
@@ -83,7 +71,7 @@ function updateFeedbacks(self) {
 		// -----------------------------------------------------------------------
 		input_state: {
 			name: 'Input State',
-			description: 'Change button style when a digital input is active (high) or inactive (low)',
+			description: 'Active when the selected input is high. Use the built-in feedback invert to trigger when low.',
 			type: 'boolean',
 			defaultStyle: {
 				bgcolor: combineRgb(13, 84, 43),    // #0D542B trigger green
@@ -97,22 +85,10 @@ function updateFeedbacks(self) {
 					default: 1,
 					choices: inputChoices(),
 				},
-				{
-					id: 'expected_state',
-					type: 'dropdown',
-					label: 'State triggers feedback when input is',
-					default: 'active',
-					choices: [
-						{ id: 'active', label: 'Active (high)' },
-						{ id: 'inactive', label: 'Inactive (low)' },
-					],
-				},
 			],
 			callback: (feedback) => {
 				const idx = Number(feedback.options.input_id) - 1
-				const isActive = self.inputState[idx] ?? false
-				const wantActive = feedback.options.expected_state === 'active'
-				return wantActive ? isActive : !isActive
+				return self.inputState[idx] ?? false
 			},
 		},
 	})

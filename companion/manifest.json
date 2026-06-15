@@ -2,7 +2,7 @@
 	"$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
 	"id": "cuevacontrol-relo-io8",
 	"name": "Cueva Control RELO IO8",
-	"shortname": "RELO IO8",
+	"shortname": "RELO-IO8",
 	"description": "Control and monitor the Cueva Control RELO IO8, an Ethernet I/O module with 8 relays and 8 digital inputs",
 	"version": "1.0.2",
 	"license": "MIT",

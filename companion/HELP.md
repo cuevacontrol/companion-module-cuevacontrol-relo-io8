@@ -69,51 +69,51 @@ The module connects automatically and reconnects if the connection drops.
 
 ## Using Variables on Buttons
 
-Variables update live from the device. Replace `instance` with your connection label (e.g. `Relo_IO8`). Use the **$** button next to the text field to pick variables from a list.
+Variables update live from the device. The default connection label is `RELO-IO8`. Use the **$** button next to the text field to pick variables from a list.
 
 ### Relays
 
 | Variable | Description |
 |---|---|
-| `$(instance:relay_N_state)` | true / false for relay N (1-8) |
-| `$(instance:relay_N_label)` | Label for relay N |
-| `$(instance:relays_on)` | Number of relays currently ON |
+| `$(RELO-IO8:relay_N_state)` | true / false for relay N (1-8) |
+| `$(RELO-IO8:relay_N_label)` | Label for relay N |
+| `$(RELO-IO8:relays_on)` | Number of relays currently ON |
 
 ### Inputs
 
 | Variable | Description |
 |---|---|
-| `$(instance:input_N_state)` | true / false for input N (1-8) |
-| `$(instance:input_N_label)` | Label for input N |
+| `$(RELO-IO8:input_N_state)` | true / false for input N (1-8) |
+| `$(RELO-IO8:input_N_label)` | Label for input N |
 
 ### Status LED
 
 | Variable | Description |
 |---|---|
-| `$(instance:led_enabled)` | true / false |
-| `$(instance:led_color)` | Color as hex (#RRGGBB) |
-| `$(instance:led_brightness)` | Brightness 0-255 |
-| `$(instance:led_effect)` | Effect number (0=Solid 1=Blink 2=Breathing 3=Rainbow 4=Chase) |
+| `$(RELO-IO8:led_enabled)` | true / false |
+| `$(RELO-IO8:led_color)` | Color as hex (#RRGGBB) |
+| `$(RELO-IO8:led_brightness)` | Brightness 0-255 |
+| `$(RELO-IO8:led_effect)` | Effect number (0=Solid 1=Blink 2=Breathing 3=Rainbow 4=Chase) |
 
 ### Connection and device
 
 | Variable | Description |
 |---|---|
-| `$(instance:connected)` | true when connected |
-| `$(instance:device_name)` | Device name |
-| `$(instance:ip)` | Device IP address |
-| `$(instance:uptime_formatted)` | Uptime (e.g. 2h 34m 12s) |
+| `$(RELO-IO8:connected)` | true when connected |
+| `$(RELO-IO8:device_name)` | Device name |
+| `$(RELO-IO8:ip)` | Device IP address |
+| `$(RELO-IO8:uptime_formatted)` | Uptime (e.g. 2h 34m 12s) |
 
 ### Diagnostic
 
 | Variable | Description |
 |---|---|
-| `$(instance:mac)` | Device MAC address |
-| `$(instance:firmware_version)` | Firmware version |
-| `$(instance:device_id)` | Unique device ID |
-| `$(instance:uptime)` | Uptime in seconds |
-| `$(instance:node_count)` | Number of nodes on the device |
-| `$(instance:preset_count)` | Number of presets on the device |
+| `$(RELO-IO8:mac)` | Device MAC address |
+| `$(RELO-IO8:firmware_version)` | Firmware version |
+| `$(RELO-IO8:device_id)` | Unique device ID |
+| `$(RELO-IO8:uptime)` | Uptime in seconds |
+| `$(RELO-IO8:node_count)` | Number of nodes on the device |
+| `$(RELO-IO8:preset_count)` | Number of presets on the device |
 
 ---
 
