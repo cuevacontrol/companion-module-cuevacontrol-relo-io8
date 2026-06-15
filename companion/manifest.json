@@ -4,7 +4,7 @@
 	"name": "Cueva Control RELO IO8",
 	"shortname": "RELO-IO8",
 	"description": "Control and monitor the Cueva Control RELO IO8, an Ethernet I/O module with 8 relays and 8 digital inputs",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"license": "MIT",
 	"repository": "https://github.com/bitfocus/companion-module-cuevacontrol-relo-io8",
 	"bugs": "https://github.com/bitfocus/companion-module-cuevacontrol-relo-io8/issues",
